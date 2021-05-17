@@ -4,7 +4,7 @@ export default function Book({details, onChange}) {
     return (
         <div className="book">
             <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${details.imageLinks.thumbnail})` }}></div>
+                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${details.imageLinks && details.imageLinks.thumbnail})` }}></div>
                 <div className="book-shelf-changer">
                     <select>
                         <option value="move" disabled>Move to...</option>
@@ -16,7 +16,7 @@ export default function Book({details, onChange}) {
                 </div>
             </div>
             <div className="book-title">{details.title}</div>
-            <div className="book-authors">{details.authors.join(", ")}</div>
+            <div className="book-authors">{details.authors && details.authors.join(", ")}</div>
         </div>
     )
 }

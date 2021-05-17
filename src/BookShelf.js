@@ -10,7 +10,7 @@ export default function BookShelf({title, books, onChange}) {
                     {
                         books.map((book) => (
                             <li key={book.id}>
-                                <Book details={book} onChange={(e) => onChange(e)} />
+                                <Book details={book} onChange={(details) => onChange(details)} />
                             </li>
                         ))
                     }

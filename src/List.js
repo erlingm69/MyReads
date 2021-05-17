@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function List() {
+export default function List({onShowSearch}) {
     return (
         <div className="list-books">
             <div className="list-books-title">
@@ -158,7 +158,7 @@ export default function List() {
                 </div>
             </div>
             <div className="open-search">
-                <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+                <button onClick={() => onShowSearch()}>Add a book</button>
             </div>
         </div>
     )

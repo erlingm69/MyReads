@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { search } from './BooksAPI'
+import Book from './Book'
 
 export default class Search extends Component {
     state = {
@@ -51,8 +52,14 @@ export default class Search extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    {JSON.stringify(this.state.searchedBooks)}
-                    <ol className="books-grid"></ol>
+                    <ol className="books-grid">{
+                        this.state.searchedBooks.map((book) => (
+                            <li key={book.id}>
+                                <Book details={book} onChange={(e) => {}} />
+                            </li>
+                        ))
+                    }
+                    </ol>
                 </div>
             </div>
         )

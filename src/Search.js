@@ -19,7 +19,11 @@ export default class Search extends Component {
                 })
             } else {
                 search(this.state.query).then((result => {
-                    if (!Object.keys(result).includes("error")) {
+                    if (Object.keys(result).includes("error")) {
+                        this.setState({
+                            searchedBooks: []
+                        })
+                    } else {
                         this.setState({
                             searchedBooks: result
                         })
@@ -55,7 +59,7 @@ export default class Search extends Component {
                     <ol className="books-grid">{
                         this.state.searchedBooks.map((book) => (
                             <li key={book.id}>
-                                <Book details={book} onChange={(e) => {}} />
+                                <Book details={book} onChange={(e) => { }} />
                             </li>
                         ))
                     }

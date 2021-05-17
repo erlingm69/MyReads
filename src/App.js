@@ -1,6 +1,7 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
+import { BrowserRouter, Route } from 'react-router-dom'
 import List from './List'
 import Search from './Search'
 
@@ -12,17 +13,17 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
-  }
-
-  setSearch(show) {
-    this.setState({showSearchPage: show})
   }
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (<Search onCloseSearch={() => this.setSearch(false)}/>) : (<List onShowSearch={() => this.setSearch(true)}/>)}
+        <BrowserRouter>
+          <Route exact path="/"
+            render={({ history }) => <List history={history} />} />
+          <Route exact path="/search"
+            render={({ history }) => <Search history={history} />} />
+        </BrowserRouter>
       </div>)
   }
 }

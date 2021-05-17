@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function List({onShowSearch}) {
+export default function List({ history, onShowSearch }) {
     return (
         <div className="list-books">
             <div className="list-books-title">
@@ -158,7 +158,9 @@ export default function List({onShowSearch}) {
                 </div>
             </div>
             <div className="open-search">
-                <button onClick={() => onShowSearch()}>Add a book</button>
+                <button onClick={() => {
+                    history.push("/search")
+                }}>Add a book</button>
             </div>
         </div>
     )

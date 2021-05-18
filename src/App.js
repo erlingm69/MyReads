@@ -2,17 +2,35 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { getAll, update } from './BooksAPI'
 import List from './List'
 import Search from './Search'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
+    myBooks: [],
+  }
+
+  componentDidMount() {
+    getAll().then((result => {
+      console.log("result=", result)
+      this.setState({
+        myBooks: result
+      })
+    }))
+  }
+
+  updateBook(details) {
+    // A book was updated and assigned a new shelf.
+    // Create a new array where only the updated book is changed
+    this.setState((prev) => ({
+      myBooks: prev.myBooks.map((book) => (book.id === details.id ? details : book))
+    }))
+
+    // Now update the server through the API too
+    update(details, details.shelf).then((result => {
+      console.log("result=", result)
+    }))
   }
 
   render() {
@@ -20,7 +38,9 @@ class BooksApp extends React.Component {
       <div className="app">
         <BrowserRouter>
           <Route exact path="/"
-            render={({ history }) => <List history={history} />} />
+            render={({ history }) => <List history={history}
+            books={this.state.myBooks}
+            onChange={(details) => this.updateBook(details)}/>} />
           <Route exact path="/search"
             render={({ history }) => <Search history={history} />} />
         </BrowserRouter>

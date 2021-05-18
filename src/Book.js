@@ -6,7 +6,7 @@ export default function Book({ details, onChange }) {
             <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${details.imageLinks && details.imageLinks.thumbnail})` }}></div>
                 <div className="book-shelf-changer">
-                    <select defaultValue={details.shelf} onChange={(e) => onChange({
+                    <select defaultValue={details.shelf === undefined ? "none" : details.shelf} onChange={(e) => onChange({
                         ...details,
                         shelf: e.target.value
                     })}>

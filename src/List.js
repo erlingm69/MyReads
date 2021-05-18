@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getAll } from './BooksAPI'
+import { getAll, update } from './BooksAPI'
 import BookShelf from './BookShelf'
 
 export default class List extends Component {
@@ -22,6 +22,11 @@ export default class List extends Component {
         this.setState((prev) => ({
             myBooks: prev.myBooks.map((book) => (book.id === details.id ? details : book))
         })) 
+
+        // Now update the server through the API too
+        update(details, details.shelf).then((result => {
+            console.log("result=", result)
+        }))
     }
 
     render() {

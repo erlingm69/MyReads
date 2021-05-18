@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { search } from './BooksAPI'
 import Book from './Book'
 
 export default class Search extends Component {
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        onChange: PropTypes.func.isRequired
+    }
 
     state = {
         searchedBooks: [],

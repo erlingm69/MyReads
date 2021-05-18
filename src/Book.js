@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Book({ details, onChange }) {
+function Book({ details, onChange }) {
     return (
         <div className="book">
             <div className="book-top">
@@ -23,3 +24,11 @@ export default function Book({ details, onChange }) {
         </div>
     )
 }
+
+Book.propTypes = {
+    details: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired
+}
+
+export default Book
+

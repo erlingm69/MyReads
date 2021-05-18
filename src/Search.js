@@ -3,9 +3,26 @@ import { search } from './BooksAPI'
 import Book from './Book'
 
 export default class Search extends Component {
+
     state = {
         searchedBooks: [],
-        query: ""
+        query: "",
+        mappedBooks: {}
+    }
+
+    createMappedBooks() {
+        // Create an object of book ids that are in use, meaning they are in the
+        // books property array, so that it can easily be used to show the book's
+        // shelf state
+        let mappedBooks = {};
+        this.props.books && this.props.books.forEach((book) => {
+            mappedBooks[book.id] = book;
+        });
+        this.setState({ mappedBooks: mappedBooks })
+    }
+
+    componentDidMount() {
+        this.createMappedBooks()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -31,9 +48,26 @@ export default class Search extends Component {
                 }))
             }
         }
+
+        if (prevProps.books !== this.props.books) {
+            this.createMappedBooks()
+        }
+    }
+
+    getBook(bookDetails) {
+        let book = bookDetails;
+
+        if (this.state.mappedBooks[bookDetails.id] !== undefined) {
+            book = this.state.mappedBooks[book.id]
+        }
+
+        return <li key={book.id}>
+            <Book details={book} onChange={(e) => { }} />
+        </li>
     }
 
     render() {
+        console.log("this.state.mappedBooks=", this.state.mappedBooks)
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -57,11 +91,7 @@ export default class Search extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">{
-                        this.state.searchedBooks.map((book) => (
-                            <li key={book.id}>
-                                <Book details={book} onChange={(e) => { }} />
-                            </li>
-                        ))
+                        this.state.searchedBooks.map((book) => this.getBook(book))
                     }
                     </ol>
                 </div>

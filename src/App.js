@@ -22,10 +22,18 @@ class BooksApp extends React.Component {
 
   updateBook(details) {
     // A book was updated and assigned a new shelf.
-    // Create a new array where only the updated book is changed
-    this.setState((prev) => ({
-      myBooks: prev.myBooks.map((book) => (book.id === details.id ? details : book))
-    }))
+    this.setState((prev) => {
+      let newMyBooks = [];
+      // Remove the updated book if it exists
+      newMyBooks = prev.myBooks.filter((book) => (book.id !== details.id))
+      // if the updated book shelf is not none then add it
+      if (details.shelf !== "none") {
+        newMyBooks = newMyBooks.concat([details])
+      }
+
+      return {
+      myBooks: newMyBooks
+    }})
 
     // Now update the server through the API too
     update(details, details.shelf).then((result => {

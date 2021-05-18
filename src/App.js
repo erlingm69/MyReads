@@ -43,7 +43,8 @@ class BooksApp extends React.Component {
               onChange={(details) => this.updateBook(details)} />} />
           <Route exact path="/search"
             render={({ history }) => <Search history={history}
-              books={this.state.myBooks} />} />
+              books={this.state.myBooks}
+              onChange={(details) => this.updateBook(details)} />} />
         </BrowserRouter>
       </div>)
   }

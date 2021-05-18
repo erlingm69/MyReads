@@ -62,7 +62,7 @@ export default class Search extends Component {
         }
 
         return <li key={book.id}>
-            <Book details={book} onChange={(e) => { }} />
+            <Book details={book} onChange={(book) => this.props.onChange(book)} />
         </li>
     }
 

@@ -11,13 +11,12 @@ class BooksApp extends React.Component {
     myBooks: [],
   }
 
-  componentDidMount() {
-    getAll().then((result => {
-      console.log("result=", result)
-      this.setState({
-        myBooks: result
-      })
-    }))
+  async componentDidMount() {
+    const books = await getAll();
+
+    this.setState({
+      myBooks: books
+    })
   }
 
   updateBook(details) {
@@ -32,12 +31,12 @@ class BooksApp extends React.Component {
       }
 
       return {
-      myBooks: newMyBooks
-    }})
+        myBooks: newMyBooks
+      }
+    })
 
     // Now update the server through the API too
     update(details, details.shelf).then((result => {
-      console.log("result=", result)
     }))
   }
 

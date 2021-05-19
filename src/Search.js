@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { search } from './BooksAPI'
 import Book from './Book'
@@ -72,13 +73,10 @@ export default class Search extends Component {
     }
 
     render() {
-        console.log("this.state.mappedBooks=", this.state.mappedBooks)
         return (
             <div className="search-books">
                 <div className="search-books-bar">
-                    <button className="close-search" onClick={() => {
-                        this.props.history.push("/")
-                    }}>Close</button>
+                    <Link className="close-search" to="/">Close</Link>
                     <div className="search-books-input-wrapper">
                         {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.

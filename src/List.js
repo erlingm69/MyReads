@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import BookShelf from './BookShelf'
 
@@ -23,9 +24,7 @@ export default class List extends Component {
                     </div>
                 </div>
                 <div className="open-search">
-                    <button onClick={() => {
-                        this.props.history.push("/search")
-                    }}>Add a book</button>
+                    <Link className="open-search-button" to="/search">Add a book</Link>
                 </div>
             </div>
         )
